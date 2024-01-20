@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сгенерировать изображение</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Сгенерировать изображение</h1>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="{{ form.model.id_for_label }}">Выберите модель:</label>
+                {{ form.model }}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.prompt.id_for_label }}">Какое изображение нужно сгенерировать:</label>
+                {{ form.prompt }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.negative_prompt.id_for_label }}">Чего не должно быть в изображении:</label>
+                {{ form.negative_prompt }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.width.id_for_label }}">Ширина изображения:</label>
+                {{ form.width }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.height.id_for_label }}">Высота изображения:</label>
+                {{ form.height }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Сгенерировать изображение</button>
+        </form>
+
+        {% if result_url %}
+            <h2>Сгенерированное изображение:</h2>
+            <img src="{{ result_url }}" alt="Generated Image">
+        {% endif %}
+    </div>
+</body>
+</html>
+
+
